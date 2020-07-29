@@ -8,6 +8,7 @@ body {
     margin: 0;
 }
 
+
 /* Navigation Bar */
 .nav {
     padding: 10px 0;
@@ -46,4 +47,137 @@ body {
     text-overflow: ellipsis;
     max-width: 100ch;
     margin-right: 1px;
+}
+
+
+/* Media Queries */
+
+@media only screen and (max-width: 600px) {
+    .navbar-brand {
+        font-size: 1.3rem;
+        margin-left: 3%;
+    }
+    .navbar-nav {
+        padding-left: 3%;
+    }
+    .box {
+        margin: 50px 3%;
+    }
+    .articl-p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 40ch;
+        margin-right: 1px;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .navbar-brand {
+        font-size: 1.3rem;
+        margin-left: 5%;
+    }
+    .box {
+        margin: 50px 5%;
+    }
+    .articl-p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 50ch;
+        margin-right: 1px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .navbar-brand {
+        font-size: 1.3rem;
+        margin-left: 8%;
+    }
+    .navbar-nav {
+        margin: 0;
+        padding: 0;
+        margin-right: 8%;
+    }
+    .nav-item .nav-link:last-child {
+        margin-right: 0;
+        padding-right: 0;
+    }
+    .box {
+        margin: 50px 8%;
+    }
+    .articl-p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 70ch;
+        margin-right: 1px;
+    }
+}
+
+@media  only screen and (min-width: 992px) {
+    .navbar-brand {
+        font-size: 1.3rem;
+        margin-left: 10%;
+    }
+    .navbar-nav {
+        margin: 0;
+        padding: 0;
+        margin-right: 10%;
+    }
+    .nav-item .nav-link:last-child {
+        margin-right: 0;
+        padding-right: 0;
+    }
+    .box {
+        margin: 50px 10%;
+    }
+    .articl-p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 80ch;
+        margin-right: 1px;
+    }
+}
+
+@media  only screen and (min-width: 1400px) {
+    .nav {
+        padding: 10px 0;
+        letter-spacing: 3px;
+    }
+    
+    .navbar-brand {
+        font-size: 1.3rem;
+        margin-left: 15%;
+    }
+    
+    .navbar-nav {
+        margin-right: 15%;
+    }
+    
+    .nav-item {
+        margin-right: 10px;
+    }
+    
+    .nav-item:last-child {
+        margin-right: 0;
+    }
+    
+    /* Contents */
+    .box {
+        margin: 50px 15%;
+    }
+    
+    .article-body {
+        display: flex;
+    }
+    
+    .articl-p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100ch;
+        margin-right: 1px;
+    }
 }
