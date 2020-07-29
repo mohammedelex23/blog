@@ -27,9 +27,9 @@
 
             <!-- Articles -->
             <% articles.forEach((article) => { %>
-            <h3><%= article.name %></h3>
+            <h3><%= article.title %></h3>
             <div class="article-body">
-                <p class="articl-p"><%= article.content %></p><a href="">Read More</a>
+                <p class="articl-p"><%= article.post %></p><a href="/<%= article.title %>">Read More</a>
             </div>
             <% }) %>
 
