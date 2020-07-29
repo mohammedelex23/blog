@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head') %>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <%- include('../partials/header') %>
+    </header>
+
+    <!-- Main -->
+    <main>
+
+        <div class="box">
+            <h3>Home</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In culpa asperiores corporis aliquam, quam a
+                impedit recusandae architecto aspernatur excepturi et nesciunt sit doloribus voluptatum, iste eos
+                maiores, labore repellat Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis pariatur
+                suscipit facilis, enim eligendi animi voluptatem iste aperiam officiis, nam, nulla iusto! Fugit minima
+                sapiente voluptates laudantium excepturi recusandae ducimus? Lorem ipsum dolor sit amet, consectetur
+                adipisicing elit. Esse iure facere in ducimus ut. Fugit, sequi hic rem nemo mollitia quod at quas
+                perferendis molestiae a delectus libero consequuntur voluptate.</p>
+
+            <!-- Articles -->
+            <% articles.forEach((article) => { %>
+            <h3><%= article.name %></h3>
+            <div class="article-body">
+                <p class="articl-p"><%= article.content %></p><a href="">Read More</a>
+            </div>
+            <% }) %>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

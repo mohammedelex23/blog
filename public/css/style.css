@@ -1,0 +1,49 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+}
+
+/* Navigation Bar */
+.nav {
+    padding: 10px 0;
+    letter-spacing: 3px;
+}
+
+.navbar-brand {
+    font-size: 1.3rem;
+    margin-left: 15%;
+}
+
+.navbar-nav {
+    margin-right: 15%;
+}
+
+.nav-item {
+    margin-right: 10px;
+}
+
+.nav-item:last-child {
+    margin-right: 0;
+}
+
+/* Contents */
+.box {
+    margin: 50px 15%;
+}
+
+.article-body {
+    display: flex;
+}
+
+.articl-p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100ch;
+    margin-right: 1px;
+}
