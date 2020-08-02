@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
 
 const app = express()
 
@@ -7,20 +8,40 @@ app.set('view engine', 'ejs')
 app.use(express.static(__dirname + '/public'))
 app.use(bodyParser.urlencoded({extended : true}))
 
-var articles = [
-    {
-        "title" : "Day 1",
-        "post": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt porro non velit omnis ea nulla nisi iste nemo maxime ex quis exercitationem mollitia aspernatur in illum, corporis cupiditate? Sapiente, eligendi. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt porro non velit omnis ea nulla nisi iste nemo maxime ex quis exercitationem mollitia aspernatur in illum, corporis cupiditate? Sapiente, eligendi. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt porro non velit omnis ea nulla nisi iste nemo maxime ex quis exercitationem mollitia aspernatur in illum, corporis cupiditate? Sapiente, eligendi. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt porro non velit omnis ea nulla nisi iste nemo maxime ex quis exercitationem mollitia aspernatur in illum, corporis cupiditate? Sapiente, eligendi."
-    },
-    {
-        "title" : "Day 2",
-        "post": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt porro non velit omnis ea nulla nisi iste nemo maxime ex quis exercitationem mollitia aspernatur in illum, corporis cupiditate? Sapiente, eligendi. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt porro non velit omnis ea nulla nisi iste nemo maxime ex quis exercitationem mollitia aspernatur in illum, corporis cupiditate? Sapiente, eligendi. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt porro non velit omnis ea nulla nisi iste nemo maxime ex quis exercitationem mollitia aspernatur in illum, corporis cupiditate? Sapiente, eligendi. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt porro non velit omnis ea nulla nisi iste nemo maxime ex quis exercitationem mollitia aspernatur in illum, corporis cupiditate? Sapiente, eligendi."
+mongoose.connect('mongodb://localhost:27017/blogDB', {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
+    if (err) {
+        console.log(err)
+    } else {
+        console.log('Seccessfully conected to mongoDB')
     }
-]
+})
+mongoose.set('useCreateIndex', true);
+
+
+// Article Schema
+const articleSchema = mongoose.Schema({
+    title : {
+        type: String,
+        unique: true
+    },
+    post : String
+})
+
+// Article Model
+const Article = mongoose.model('Articl', articleSchema)
+
 
 // Home page
 app.get('/', (req, res) => {
-    res.render('pages/home', { articles : articles })
+
+    Article.find((err, articles) => {
+        if (err) {
+            console.log(err)
+            res.render('pages/errorPage', {"error": err})
+        } else {
+            res.render('pages/home', { articles : articles})
+        }
+    })
 })
 
 // Create new article page
@@ -34,32 +55,31 @@ app.post('/create', (req, res) => {
     var title = req.body.title
     var post = req.body.post
 
-    var article = articles.filter(article => article.title === title)
+    var article = new Article({
+        title,
+        post
+    })
 
-    if (article.length === 0 || article === undefined) {
-        articles.push({
-            "title" : title,
-            "post" : post
-        })
-        res.redirect('/')
-    } else {
-        res.render('pages/errorPage', {"error" : "Article with this name already exist !"})
-    }
-
-    
+    article.save((err) => {
+        if (err) {
+            res.render('pages/errorPage', {"error": err})
+        } else {
+            res.redirect('/')
+        }
+    })    
 })
 
 // Serve specific article with name
 app.get('/:articleName', (req, res) => {
-    var articleName = req.params.articleName
-    var article = articles.filter((article) => article.title === articleName)
 
-    if (article.length === 0 || article === undefined) {
-        res.render('pages/errorPage', {"error" : "OOPS ! No article related to this name"})
-    } else {
-        console.log(article)
-        res.render('pages/article', { article : article })
-    }
+    var articleName = decodeURIComponent(req.params.articleName)
+    Article.findOne({title: articleName}, (err, article) => {
+        if (err) {
+            res.render('pages/errorPage', {"error": err})
+        } else {
+            res.render('pages/article', { article : article })
+        }
+    })
 })
 
 

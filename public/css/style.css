@@ -8,6 +8,9 @@ body {
     margin: 0;
 }
 
+p {
+    word-wrap: break-word;
+}
 
 /* Navigation Bar */
 .nav {
@@ -67,7 +70,7 @@ body {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 40ch;
+        max-width: 30ch;
         margin-right: 1px;
     }
 }
